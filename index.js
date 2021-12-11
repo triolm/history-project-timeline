@@ -18,7 +18,7 @@ app.post("/rendered", (req, res) => {
     res.render("index", { sheet: data })
 })
 
-app.listen(3000, (req, res) => {
+app.listen(process.env.PORT || 8080, (req, res) => {
     console.log("aaaaa")
 })
 
