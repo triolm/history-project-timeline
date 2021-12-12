@@ -15,5 +15,14 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/triolm/history-project-timeline.git"
+  },
+  "bugs": {
+    "url": "https://github.com/triolm/history-project-timeline/issues"
+  },
+  "homepage": "https://github.com/triolm/history-project-timeline#readme"
 }

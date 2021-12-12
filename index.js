@@ -2,6 +2,7 @@ const express = require('express');
 const ejs = require('ejs');
 const app = express();
 const path = require('path');
+const port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs")
 app.set('path', path.join(__dirname + "views"));
@@ -15,24 +16,36 @@ app.get("/", (req, res) => {
 
 app.post("/rendered", (req, res) => {
     data = parse(req.body.txt);
-    res.render("index", { sheet: data })
+    res.render("index", { sheet: data, minDist: smallestDiff(data) })
 })
 
-app.listen(process.env.PORT || 8080, (req, res) => {
-    console.log("aaaaa")
+app.listen(port, (req, res) => {
+    console.log(`listening on port ${port}`)
 })
 
 
 parse = (str) => {
-    let json = []
+    let json = {}
     let arr = str.split("\n")
     for (i of arr) {
-        el = i.split('\t')
+        let el = i.split('\t')
         j = {}
-        j.year = el[0]
-        j.text = el[1]
-        j.url = el[2]
-        json.push(j)
+        if (json[el[0].trim()]) {
+            json[el[0].trim()].push({ txt: el[1].trim(), url: el[2].trim() })
+        }
+        else {
+            json[el[0].trim()] = [{ txt: el[1].trim(), url: el[2].trim() }]
+        }
     }
     return json;
+}
+
+smallestDiff = (obj) => {
+    smallest = 1000;
+    let prev = 0;
+    for (i in obj) {
+        if (i - prev < smallest) smallest = i - prev;
+        prev = i;
+    }
+    return smallest
 }
