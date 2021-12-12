@@ -27,15 +27,16 @@ app.listen(port, (req, res) => {
 parse = (str) => {
     let json = {}
     let arr = str.split("\n")
+    id = 0;
     for (i of arr) {
         let el = i.split('\t')
-        j = {}
         if (json[el[0].trim()]) {
-            json[el[0].trim()].push({ txt: el[1].trim(), url: el[2].trim() })
+            json[el[0].trim()].push({ txt: el[1].trim(), url: el[2].trim(), id })
         }
         else {
-            json[el[0].trim()] = [{ txt: el[1].trim(), url: el[2].trim() }]
+            json[el[0].trim()] = [{ txt: el[1].trim(), url: el[2].trim(), id }]
         }
+        id++;
     }
     return json;
 }

@@ -30,11 +30,14 @@
                         </td>
                         <td>
                             <% for( j of sheet[i]) { %>
-                                <a href=" <%=j.url %>" class="card p-2 mt-2">
+                                <button id="<%=j.id%>" class="card p-2 mt-2">
                                     <span>
                                         <%= j.txt %>
                                     </span>
-                                </a>
+                                    <div class="more">
+                                        <%= j.url %>
+                                    </div>
+                                </button>
                                 <% } %>
                         </td>
                     </tr>
@@ -43,6 +46,21 @@
         </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let data = JSON.parse('<%- JSON.stringify(sheet) %>');
+        for (i of document.querySelectorAll("button")) {
+            i.addEventListener("click", (e) => {
+                e.target.classList.toggle("open")
+                let content = e.target.querySelector('div');
+                console.log(content);
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            })
+        }
+    </script>
 </body>
 
 </html>
@@ -50,17 +68,22 @@
 <style>
     :root {
         --border: 4px solid #7eb0bf;
+        --dotsize: 20px;
     }
 
-    a {
+    button {
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        text-align: justify;
         color: black;
         text-decoration: none;
         transition: box-shadow 200ms;
     }
 
-    a:hover {
+    button:hover {
         color: black;
-        box-shadow: 2px 2px 3px #00000044;
+        box-shadow: 2px 2px 3px #00000011;
     }
 
     body {
@@ -102,13 +125,30 @@
     .dot {
         margin-left: auto;
         top: 50%;
-        transform: translateY(-50%);
-        left: 91.5%;
+        left: 102%;
+        transform: translate(-50%, -50%);
         position: absolute;
-        width: 20px;
-        height: 20px;
+        width: var(--dotsize);
+        height: var(--dotsize);
         border-radius: 50%;
         background-color: white;
         border: var(--border);
+    }
+
+    .open {
+        font-weight: 800;
+    }
+
+    .more {
+        font-weight: 400;
+        transition: all 300ms;
+        max-height: 0;
+        overflow: hidden;
+
+    }
+
+    span,
+    .more {
+        pointer-events: none;
     }
 </style>
