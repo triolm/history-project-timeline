@@ -39,7 +39,7 @@
                     <% let cats="" ; %>
                         <% for(j of sheet[i]){ cats +=" " + j.cat } %>
 
-                            <tr class="cats"
+                            <tr class="<%= cats %> "
                                 style="height: <%= ((new Date(i) - new Date(prev) - minDist) / minDist) * 3 %>px;">
                                 <td></td>
                                 <td></td>
