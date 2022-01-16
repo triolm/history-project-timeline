@@ -30,23 +30,28 @@ parse = (str) => {
     id = 0;
     for (i of arr) {
         let el = i.split('\t')
+        specificity = ["year", "month", "day"][el[0].trim().split(" ").length - 1];
+        el[0] = new Date(el[0]).toISOString();
         if (json[el[0].trim()]) {
-            json[el[0].trim()].push({ txt: el[1].trim(), url: el[2].trim(), id })
+            json[el[0].trim()].push({ txt: el[1].trim(), url: el[2].trim(), cat: el[3].trim(), id, specificity })
         }
         else {
-            json[el[0].trim()] = [{ txt: el[1].trim(), url: el[2].trim(), id }]
+            json[el[0].trim()] = [{ txt: el[1].trim(), url: el[2].trim(), cat: el[3].trim(), id, specificity }]
         }
         id++;
     }
+    json = Object.fromEntries(Object.entries(json).sort())
     return json;
 }
 
 smallestDiff = (obj) => {
-    smallest = 1000;
-    let prev = 0;
+    smallest = Infinity;
+    let prev = Infinity;
     for (i in obj) {
-        if (i - prev < smallest) smallest = i - prev;
+        if (new Date(i).getTime() - new Date(prev).getTime() < smallest) { smallest = new Date(i).getTime() - new Date(prev).getTime() };
         prev = i;
     }
     return smallest
 }
+
+
