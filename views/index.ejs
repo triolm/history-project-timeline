@@ -62,10 +62,10 @@
                                     <% for( j of sheet[i]) { %>
                                         <button id="<%=j.id%>" class="card p-2 mt-2 <%= j.cat %> ">
                                             <span>
-                                                <%= j.txt %>
+                                                <%= j.txt.replaceAll("&#39;","'").replaceAll("&#34;",'"') %>
                                             </span>
                                             <div class="more">
-                                                <%= j.url %>
+                                                <%= j.url.replaceAll("&#39;","'").replaceAll("&#34;",'"') %>
                                             </div>
                                         </button>
                                         <% } %>
@@ -81,7 +81,6 @@
 
         for (i of cats) {
             el = document.querySelector("#" + i).addEventListener("input", (e) => {
-                console.log("hi")
                 document.documentElement.style.setProperty("--" + e.target.id, (e.target.checked ? "table-row" : "none"));
 
             })
@@ -92,7 +91,6 @@
             i.addEventListener("click", (e) => {
                 e.target.classList.toggle("open")
                 let content = e.target.querySelector('div');
-                console.log(content);
                 if (content.style.maxHeight) {
                     content.style.maxHeight = null;
                 } else {

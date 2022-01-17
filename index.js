@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
 })
 
 app.post("/rendered", (req, res) => {
-    data = parse(req.body.txt);
+    data = parse(req.body.txt.replaceAll("'", "&#39;").replaceAll('"', "&#34;"));
     res.render("index", { sheet: data, minDist: smallestDiff(data) })
 })
 
@@ -53,5 +53,4 @@ smallestDiff = (obj) => {
     }
     return smallest
 }
-
 
