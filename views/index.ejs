@@ -38,41 +38,41 @@
 
                     <% let cats="" ; %>
                         <% for(j of sheet[i]){ cats +=" " + j.cat } %>
+                            <% let height=(((new Date(i) - new Date(prev) - minDist) / minDist) * 3 < 1000) ? (((new
+                                Date(i) - new Date(prev) - minDist) / minDist) * 3) : 1000 %>
+                                <tr class="<%= cats %> " style="height: <%= height %>px;">
+                                    <td></td>
+                                    <td></td>
+                                </tr>
 
-                            <tr class="<%= cats %> "
-                                style="height: <%= ((new Date(i) - new Date(prev) - minDist) / minDist) * 3 %>px;">
-                                <td></td>
-                                <td></td>
-                            </tr>
-
-                            <tr class="<%= cats %> ">
-                                <td>
-                                    <div class="dot"></div>
-                                    <% if(sheet[i][0].specificity=="month" || sheet[i][0].specificity=="day" ) { %>
-                                        <%= new Date(i).toLocaleString('default', { month: 'long' }) %>
-                                            <% if(sheet[i][0].specificity=="day" ) { %>
-                                                <%=new Date(i).getUTCDate()%>
-                                                    <% } %>
-                                                        <span>,</span>
+                                <tr class="<%= cats %> ">
+                                    <td>
+                                        <div class="dot"></div>
+                                        <% if(sheet[i][0].specificity=="month" || sheet[i][0].specificity=="day" ) { %>
+                                            <%= new Date(i).toLocaleString('default', { month: 'long' }) %>
+                                                <% if(sheet[i][0].specificity=="day" ) { %>
+                                                    <%=new Date(i).getUTCDate()%>
                                                         <% } %>
-                                                            <%= new Date(i).getFullYear().toString() %>
+                                                            <span>,</span>
+                                                            <% } %>
+                                                                <%= new Date(i).getFullYear().toString() %>
 
-                                </td>
-                                <td>
-                                    <% for( j of sheet[i]) { %>
-                                        <button id="<%=j.id%>" class="card p-2 mt-2 <%= j.cat %> ">
-                                            <span>
-                                                <%= j.txt.replaceAll("&#39;","'").replaceAll("&#34;",'"') %>
-                                            </span>
-                                            <div class="more">
-                                                <%= j.url.replaceAll("&#39;","'").replaceAll("&#34;",'"') %>
-                                            </div>
-                                        </button>
-                                        <% } %>
-                                </td>
-                            </tr>
-                            <% prev=i %>
-                                <% } %>
+                                    </td>
+                                    <td>
+                                        <% for( j of sheet[i]) { %>
+                                            <button id="<%=j.id%>" class="card p-2 mt-2 <%= j.cat %> ">
+                                                <span>
+                                                    <%= j.txt.replaceAll("&#39;","'").replaceAll("&#34;",'"') %>
+                                                </span>
+                                                <div class="more">
+                                                    <%= j.url.replaceAll("&#39;","'").replaceAll("&#34;",'"') %>
+                                                </div>
+                                            </button>
+                                            <% } %>
+                                    </td>
+                                </tr>
+                                <% prev=i %>
+                                    <% } %>
         </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -151,6 +151,7 @@
     }
 
     tr:nth-of-type(2n-1) td {
+        max-height: 1200px;
         padding: 0;
     }
 
