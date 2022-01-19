@@ -48,12 +48,13 @@
                                 <tr class="<%= cats %> ">
                                     <td>
                                         <div class="dot"></div>
-                                        <% if(sheet[i][0].specificity=="month" || sheet[i][0].specificity=="day" ) { %>
-                                            <%= new Date(i).toLocaleString('default', { month: 'long' }) %>
-                                                <% if(sheet[i][0].specificity=="day" ) { %>
-                                                    <%=new Date(i).getUTCDate()%>
-                                                        <% } %>
-                                                            <span>,</span>
+                                        <% if(sheet[i][0].specificity=="month" ) { %>
+                                            <%= new Date(i).toLocaleString('default', { month: 'long' }).trim() + "," %>
+
+                                                <%} else if(sheet[i][0].specificity=="day" ) { %>
+                                                    <%= new Date(i).toLocaleString('default', { month: 'long' }).trim()
+                                                        + "," %>
+                                                        <%=new Date(i).getUTCDate() + "," %>
                                                             <% } %>
                                                                 <%= new Date(i).getFullYear().toString() %>
 
@@ -141,6 +142,7 @@
     }
 
     td {
+        white-space: normal;
         vertical-align: middle;
         position: relative;
         padding: 20px;
