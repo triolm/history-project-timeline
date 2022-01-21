@@ -38,8 +38,8 @@
 
                     <% let cats="" ; %>
                         <% for(j of sheet[i]){ cats +=" " + j.cat } %>
-                            <% let height=(((new Date(i) - new Date(prev) - minDist) / minDist) * 3 < 1000) ? (((new
-                                Date(i) - new Date(prev) - minDist) / minDist) * 3) : 1000 %>
+                            <% let height=(((new Date(i) - new Date(prev) - minDist) / minDist) * 3 < 600) ? (((new
+                                Date(i) - new Date(prev) - minDist) / minDist) * 3) : 600 %>
                                 <tr class="<%= cats %> " style="height: <%= height %>px;">
                                     <td></td>
                                     <td></td>
@@ -52,7 +52,8 @@
                                             <%= new Date(i).toLocaleString('default', { month: 'long' }).trim() + "," %>
 
                                                 <%} else if(sheet[i][0].specificity=="day" ) { %>
-                                                    <%= new Date(i).toLocaleString('default', { month: 'long' }).trim()%>
+                                                    <%= new Date(i).toLocaleString('default', { month: 'long'
+                                                        }).trim()%>
                                                         <%=new Date(i).getUTCDate() + "," %>
                                                             <% } %>
                                                                 <%= new Date(i).getFullYear().toString() %>
