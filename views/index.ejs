@@ -52,8 +52,7 @@
                                             <%= new Date(i).toLocaleString('default', { month: 'long' }).trim() + "," %>
 
                                                 <%} else if(sheet[i][0].specificity=="day" ) { %>
-                                                    <%= new Date(i).toLocaleString('default', { month: 'long' }).trim()
-                                                        + "," %>
+                                                    <%= new Date(i).toLocaleString('default', { month: 'long' }).trim()%>
                                                         <%=new Date(i).getUTCDate() + "," %>
                                                             <% } %>
                                                                 <%= new Date(i).getFullYear().toString() %>
